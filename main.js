@@ -37,7 +37,7 @@ function parse_num(num) {
                 text = "Nine" + text;
                 break;
             default: 
-                text = "Zero" + text;
+                throw "Invalid Input";
         }
         num = (num - num%10)/10;
     } while (num > 0);
@@ -50,7 +50,12 @@ function parse_num(num) {
 function parse(num_array){
     var text = "";
     for (var i = 0; i<num_array.length; i++){
-        text += parse_num(num_array[i]);
+        try {
+            text += parse_num(num_array[i]);
+        }
+        catch(err){
+            text += err;
+        }
         if (i != num_array.length - 1){
             text += ",";
         }
