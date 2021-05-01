@@ -1,7 +1,8 @@
 //parse function
-//input:  num:int
+//input:  num:number
 //output: string
-//effect: Convert input to the string representing the phonetic equivalent
+//effect: If it is an integer, convert input to the string representing the phonetic equivalent.
+//        Else throw an exception.
 function parse_num(num) {
     var text = "";
     do {
@@ -40,18 +41,19 @@ function parse_num(num) {
                 throw "Invalid Input";
         }
         num = (num - num%10)/10;
+
     } while (num > 0);
     return text;
 }
 
-//input:  num_array:int array
+//input:  num_array:string array
 //output: string
 //effect: Convert input to the string representing the phonetic equivalent
 function parse(num_array){
     var text = "";
-    for (var i = 0; i<num_array.length; i++){
+    for (var i = 0; i<num_array.length; i++){      
         try {
-            text += parse_num(num_array[i]);
+            text += parse_num(Number(num_array[i]));
         }
         catch(err){
             text += err;
@@ -62,10 +64,7 @@ function parse(num_array){
     }
     return text;
 }
-//parse command line argument
-console.log(process.argv);
-//store argv in an array
+//parse command line argument and store in an array
 var input_array = process.argv.slice(2);
-console.log(input_array);
-
+//parse input and output to stdout
 console.log(parse(input_array));
